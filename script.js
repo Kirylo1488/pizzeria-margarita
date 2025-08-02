@@ -17,14 +17,14 @@ const app = createApp({
                     name: "Пепероні",
                     description: "Піца з томатним соусом, моцарелою та ковбаскою пепероні",
                     price: 170,
-                    image: "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcipollino.ua%2Fua%2Fpytstsa-pepperony-sostav-retsept-y-kaloryinost&psig=AOvVaw10FiW_MNHKS93h-DjhvyA-&ust=1754216774228000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCPCc_PD0644DFQAAAAAdAAAAABAE"
                 },
                 {
                     id: 3,
                     name: "Гавайська",
                     description: "Піца з томатним соусом, моцарелою, куркою та ананасами",
                     price: 180,
-                    image: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.gastronom.ru%2Ftext%2Fgavajskaya-picca-1022301&psig=AOvVaw2_8NtdggTZy0opgoTgAhoq&ust=1754216920183000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCOCuhLf1644DFQAAAAAdAAAAABAE"
                 },
                 {
                     id: 4,
@@ -36,16 +36,16 @@ const app = createApp({
                 {
                     id: 5,
                     name: "Вегетаріанська",
-                    description: "Піца з томатним соусом, моцарелою, перцем, грибами, оливками та цибулею",
+                    description: "Піца з томатним соусом, моцарелою, перцем, грибами, оливками та броколямі",
                     price: 160,
-                    image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fprosto-vkysno.ru%2Fvypechka%2Fvegetarianskaya-pitstsu%2F&psig=AOvVaw1E9jO7EmoXVRiTwYMURLcb&ust=1754217005246000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCOjdreD1644DFQAAAAAdAAAAABAV"
                 },
                 {
                     id: 6,
                     name: "М'ясна",
-                    description: "Піца з томатним соусом, моцарелою, пепероні, беконом, ковбаскою та куркою",
+                    description: "Піца з томатним соусом, моцарелою, пепероні, олівками, беконом, ковбаскою та куркою",
                     price: 190,
-                    image: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fepicentrk.ua%2Fshop%2Fpitsa-miasnyi-miks-z-pertsem-chili-vyr-480-h.html&psig=AOvVaw0D1LMl8aOAwLppRX3t6vxd&ust=1754217192350000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCMD_2NH2644DFQAAAAAdAAAAABAE"
                 }
             ],
             cartItems: []
