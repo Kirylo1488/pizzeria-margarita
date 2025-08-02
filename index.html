@@ -1,103 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-     <meta charset="UTF-8">
-     <meta name="wiewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="style.css">
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-     <link
-     rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-   />
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-     <title> Pizzeria-Margarita </title>
-    
-    </head>
-    <body>
-     
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-
-  <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button> -->
-  
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>PIZZA-MARGARITA | Доставка піци</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo animate__animated animate__fadeInDown">
+                    <h1>PIZZA-MARGARITA</h1>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#menu">Меню</a></li>
+                        <li><a href="#about">Про нас</a></li>
+                        <li><a href="#contacts">Контакти</a></li>
+                        <li>
+                            <button class="cart-btn" @click="toggleCart">
+                                Кошик ({{ cartTotalQuantity }})
+                                <span class="cart-total">{{ cartTotalPrice }} ₴</span>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="modal-body">
-          ...
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="animate__animated animate__fadeIn">Справжня італійська піца у Львові</h2>
+                    <p class="animate__animated animate__fadeIn animate__delay-1s">Доставка за 60 хвилин або піца безкоштовно</p>
+                    <a href="#menu" class="btn animate__animated animate__fadeIn animate__delay-2s">Замовити</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu">
+            <div class="container">
+                <h2>Наше меню</h2>
+                <div class="menu-items">
+                    <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
+                        <img :src="item.image" :alt="item.name">
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.description }}</p>
+                        <div class="item-footer">
+                            <span class="price">{{ item.price }} ₴</span>
+                            <button class="add-to-cart" @click="addToCart(item)">Додати</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>Про нашу піцерію</h2>
+                <p>PIZZA-MARGARITA - це сімейна піцерія, де ми готуємо справжню італійську піцу за традиційними рецептами. Ми використовуємо тільки свіжі інгредієнти та дбайливо ставимося до кожного клієнта.</p>
+            </div>
+        </section>
+
+        <section id="contacts" class="contacts">
+            <div class="container">
+                <h2>Наші контакти</h2>
+                <p>м. Львів, вул. Шевченка, 123</p>
+                <p>Телефон: +380 (67) 123 4567</p>
+                <p>Графік роботи: 10:00 - 22:00</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Кошик -->
+    <div class="cart-modal" :class="{ 'active': isCartOpen }">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Ваше замовлення</h3>
+                <button class="close-cart" @click="toggleCart">&times;</button>
+            </div>
+            <div class="cart-items">
+                <div v-if="cartItems.length === 0" class="empty-cart">
+                    <p>Кошик порожній</p>
+                </div>
+                <div class="cart-item" v-for="(item, index) in cartItems" :key="index">
+                    <img :src="item.image" :alt="item.name">
+                    <div class="cart-item-info">
+                        <h4>{{ item.name }}</h4>
+                        <div class="cart-item-controls">
+                            <button @click="decreaseQuantity(item)">-</button>
+                            <span>{{ item.quantity }}</span>
+                            <button @click="increaseQuantity(item)">+</button>
+                        </div>
+                        <span class="cart-item-price">{{ item.price * item.quantity }} ₴</span>
+                        <button class="remove-item" @click="removeFromCart(item)">Видалити</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Всього:</span>
+                    <span>{{ cartTotalPrice }} ₴</span>
+                </div>
+                <button class="checkout-btn" @click="checkout" :disabled="cartItems.length === 0">
+                    Оформити замовлення
+                </button>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 PIZZA-MARGARITA. Усі права захищені.</p>
         </div>
-      </div>
-    </div>
-  </div> -->
-  
+    </footer>
 
-<div id="app">
-  <div class="mb-3">
-    <label for="login" class="form-label">Введи своє імя</label>
-    <input 
-    type="text"
-    v-model="user"
-    class="form-control"
-    id="login"
-    placeholder="Наприклад Іван"
-    style="width: 200px;"
-    />
-    </div>
-    <button @click="loginUser">Вхід</button>
-    </div>
-
-
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.15/vue.global.min.js"></script>
-<script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.15/vue.global.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
