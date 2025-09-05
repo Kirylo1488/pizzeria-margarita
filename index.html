@@ -3,145 +3,848 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>PIZZA-MARGARITA | Доставка піци</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo h1 {
+            color: #e74c3c;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav ul li {
+            margin-left: 30px;
+        }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav ul li a:hover {
+            color: #e74c3c;
+        }
+
+        .cart-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .cart-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .cart-total {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            margin-top: 70px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            max-width: 600px;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        .menu {
+            padding: 80px 0;
+        }
+
+        .menu h2, .about h2, .about-us h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #333;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item h3 {
+            padding: 15px 20px 0;
+            font-size: 20px;
+        }
+
+        .menu-item p {
+            padding: 10px 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 18px;
+            color: #e74c3c;
+        }
+
+        .add-to-cart {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #c0392b;
+        }
+
+        .about, .about-us {
+            padding: 60px 0;
+            background-color: white;
+        }
+
+        .about p, .about-us p {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .team {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+
+        .team h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: #333;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #e74c3c;
+        }
+
+        .team-member p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .team-member .position {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Кошик */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s;
+            z-index: 2000;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 50px 0;
+            color: #666;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-controls button {
+            width: 25px;
+            height: 25px;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .cart-item-controls span {
+            margin: 0 10px;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: #e74c3c;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .checkout-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Сторінки */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+            }
+            
+            .nav ul {
+                margin-top: 20px;
+            }
+            
+            .nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-members {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-inner">
-                <div class="logo animate__animated animate__fadeInDown">
-                    <h1>PIZZA-MARGARITA</h1>
-                </div>
-                <nav class="nav">
-                    <ul>
-                        <li><a href="#menu">Меню</a></li>
-                        <li><a href="#about">Про нас</a></li>
-                        <li><a href="#contacts">Контакти</a></li>
-                        <li>
-                            <button class="cart-btn" @click="toggleCart">
-                                Кошик ({{ cartTotalQuantity }})
-                                <span class="cart-total">{{ cartTotalPrice }} ₴</span>
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <main class="main">
-        <section class="hero">
+    <div id="app">
+        <header class="header">
             <div class="container">
-                <div class="hero-content">
-                    <h2 class="animate__animated animate__fadeIn">Справжня італійська піца у Запоріжжі</h2>
-                    <p class="animate__animated animate__fadeIn animate__delay-1s">Доставка за 60 хвилин або піца безкоштовно</p>
-                    <a href="#menu" class="btn animate__animated animate__fadeIn animate__delay-2s">Замовити</a>
+                <div class="header-inner">
+                    <div class="logo animate__animated animate__fadeInDown">
+                        <h1>PIZZA-MARGARITA</h1>
+                    </div>
+                    <nav class="nav">
+                        <ul>
+                            <li><a href="#" @click.prevent="showPage('home')">Головна</a></li>
+                            <li><a href="#" @click.prevent="showPage('menu')">Меню</a></li>
+                            <li><a href="#" @click.prevent="showPage('about-us')">Про нас</a></li>
+                            <li>
+                                <button class="cart-btn" @click="toggleCart">
+                                    Кошик ({{ cartTotalQuantity }})
+                                    <span class="cart-total">{{ cartTotalPrice }} ₴</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <section id="menu" class="menu">
-            <div class="container">
-                <h2>Наше меню</h2>
-                <div class="menu-items">
-                    <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
+        <main class="main">
+            <!-- Головна сторінка -->
+            <div id="home-page" class="page" :class="{ 'active': currentPage === 'home' }">
+                <section class="hero">
+                    <div class="container">
+                        <div class="hero-content">
+                            <h2 class="animate__animated animate__fadeIn">Справжня італійська піца у Запоріжжі</h2>
+                            <p class="animate__animated animate__fadeIn animate__delay-1s">Доставка за 60 хвилин або піца безкоштовно</p>
+                            <a href="#" class="btn animate__animated animate__fadeIn animate__delay-2s" @click.prevent="showPage('menu')">Замовити</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="about" class="about">
+                    <div class="container">
+                        <h2>Про нашу піцерію</h2>
+                        <p>PIZZA-MARGARITA – це місце, де народжуються справжні італійські смаки! Ми не просто готуємо піцу – ми створюємо маленькі кулінарні шедеври за традиційними рецептами, які передавалися поколіннями італійських майстрів.
+
+        Наша секретна формула проста:
+        ✔ Автентичні рецепти – тільки перевірені часом технології приготування
+        ✔ Найсвіжіші інгредієнти – відбираємо лише якісні продукти
+        ✔ Ручна робота – кожна піца готується вручну з особливою турботою
+        ✔ Затишна атмосфера – теплий прийом та комфорт для кожного гостя
+
+        Ми пишаємося тим, що:
+
+        Використовуємо справжню неаполітанську технологію приготування тіста
+
+        Готуємо на дровах у професійній печі, як це роблять у Італії
+
+        Пропонуємо щедрі порції та увагу до деталей
+
+        PIZZA-MARGARITA – це більше ніж просто їжа. Це справжня італійська традиція, яку ми з любов'ю даруємо нашим гостям. Приходьте скуштувати разом з нами!
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Сторінка меню -->
+            <div id="menu-page" class="page" :class="{ 'active': currentPage === 'menu' }">
+                <section id="menu" class="menu">
+                    <div class="container">
+                        <h2>Наше меню</h2>
+                        <div class="menu-items">
+                            <div class="menu-item" v-for="(item, index) in menuItems" :key="index">
+                                <img :src="item.image" :alt="item.name">
+                                <h3>{{ item.name }}</h3>
+                                <p>{{ item.description }}</p>
+                                <div class="item-footer">
+                                    <span class="price">{{ item.price }} ₴</span>
+                                    <button class="add-to-cart" @click="addToCart(item)">Додати</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Сторінка про нас -->
+            <div id="about-us-page" class="page" :class="{ 'active': currentPage === 'about-us' }">
+                <section class="about-us">
+                    <div class="container">
+                        <h2>Наша команда</h2>
+                        <p>Ми - команда професіоналів, які люблять свою справу та створюють для вас найсмачнішу піцу за традиційними італійськими рецептами.</p>
+                    </div>
+                </section>
+
+                <section class="team">
+                    <div class="container">
+                        <div class="team-members">
+                            <div class="team-member">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIy0HOuhT7eI2CoZV0qv530Tbv45dCYU7npg&s" alt="Марко Россі">
+                                <div class="team-member-info">
+                                    <h3>Марко Россі</h3>
+                                    <p class="position">Головний піцайоло</p>
+                                    <p>Досвід роботи: 15 років</p>
+                                    <p>Навчався мистецтву приготування піци в Неаполі, Італія. Спеціалізується на автентичних неаполітанських піцах.</p>
+                                </div>
+                            </div>
+                            <div class="team-member">
+                                <img src="https://img.freepik.com/free-photo/medium-shaot-woman-standing-office-with-her-hands-folded_1098-20025.jpg?semt=ais_hybrid&w=740&q=80" alt="Олена Петренко">
+                                <div class="team-member-info">
+                                    <h3>Олена Петренко</h3>
+                                    <p class="position">Менеджер</p>
+                                    <p>Досвід роботи: 8 років</p>
+                                    <p>Засновниця та ідейна натхненниця PIZZA-MARGARITA. Створила концепцію справжньої італійської піцерії в Запоріжжі.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Кошик -->
+        <div class="cart-modal" :class="{ 'active': isCartOpen }">
+            <div class="cart-content">
+                <div class="cart-header">
+                    <h3>Ваше замовлення</h3>
+                    <button class="close-cart" @click="toggleCart">&times;</button>
+                </div>
+                <div class="cart-items">
+                    <div v-if="cartItems.length === 0" class="empty-cart">
+                        <p>Кошик порожній</p>
+                    </div>
+                    <div class="cart-item" v-for="(item, index) in cartItems" :key="index">
                         <img :src="item.image" :alt="item.name">
-                        <h3>{{ item.name }}</h3>
-                        <p>{{ item.description }}</p>
-                        <div class="item-footer">
-                            <span class="price">{{ item.price }} ₴</span>
-                            <button class="add-to-cart" @click="addToCart(item)">Додати</button>
+                        <div class="cart-item-info">
+                            <h4>{{ item.name }}</h4>
+                            <div class="cart-item-controls">
+                                <button @click="decreaseQuantity(item)">-</button>
+                                <span>{{ item.quantity }}</span>
+                                <button @click="increaseQuantity(item)">+</button>
+                            </div>
+                            <span class="cart-item-price">{{ item.price * item.quantity }} ₴</span>
+                            <button class="remove-item" @click="removeFromCart(item)">Видалити</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <div class="container">
-                <h2>Про нашу піцерію</h2>
-                <p>PIZZA-MARGARITA – це місце, де народжуються справжні італійські смаки! Ми не просто готуємо піцу – ми створюємо маленькі кулінарні шедеври за традиційними рецептами, які передавалися поколіннями італійських майстрів.
-
-Наша секретна формула проста:
-✔ Автентичні рецепти – тільки перевірені часом технології приготування
-✔ Найсвіжіші інгредієнти – відбираємо лише якісні продукти
-✔ Ручна робота – кожна піца готується вручну з особливою турботою
-✔ Затишна атмосфера – теплий прийом та комфорт для кожного гостя
-
-Ми пишаємося тим, що:
-
-Використовуємо справжню неаполітанську технологію приготування тіста
-
-Готуємо на дровах у професійній печі, як це роблять у Італії
-
-Пропонуємо щедрі порції та увагу до деталей
-
-PIZZA-MARGARITA – це більше ніж просто їжа. Це справжня італійська традиція, яку ми з любов'ю даруємо нашим гостям. Приходьте скуштувати разом з нами!
-                </p>
-            </div>
-        </section>
-
-        <section id="contacts" class="contacts">
-            <div class="container">
-                <h2>Наші контакти</h2>
-                <p>м. Запоріжжя, вул. Шевченка, 123</p>
-                <p>Телефон: +380 (67) 123 4567</p>
-                <p>Графік роботи: 10:00 - 22:00</p>
-            </div>
-        </section>
-    </main>
-
-    <!-- Кошик -->
-    <div class="cart-modal" :class="{ 'active': isCartOpen }">
-        <div class="cart-content">
-            <div class="cart-header">
-                <h3>Ваше замовлення</h3>
-                <button class="close-cart" @click="toggleCart">&times;</button>
-            </div>
-            <div class="cart-items">
-                <div v-if="cartItems.length === 0" class="empty-cart">
-                    <p>Кошик порожній</p>
-                </div>
-                <div class="cart-item" v-for="(item, index) in cartItems" :key="index">
-                    <img :src="item.image" :alt="item.name">
-                    <div class="cart-item-info">
-                        <h4>{{ item.name }}</h4>
-                        <div class="cart-item-controls">
-                            <button @click="decreaseQuantity(item)">-</button>
-                            <span>{{ item.quantity }}</span>
-                            <button @click="increaseQuantity(item)">+</button>
-                        </div>
-                        <span class="cart-item-price">{{ item.price * item.quantity }} ₴</span>
-                        <button class="remove-item" @click="removeFromCart(item)">Видалити</button>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>Всього:</span>
+                        <span>{{ cartTotalPrice }} ₴</span>
                     </div>
+                    <button class="checkout-btn" @click="checkout" :disabled="cartItems.length === 0">
+                        Оформити замовлення
+                    </button>
                 </div>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total">
-                    <span>Всього:</span>
-                    <span>{{ cartTotalPrice }} ₴</span>
-                </div>
-                <button class="checkout-btn" @click="checkout" :disabled="cartItems.length === 0">
-                    Оформити замовлення
-                </button>
             </div>
         </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 PIZZA-MARGARITA. Усі права захищені.</p>
+            </div>
+        </footer>
     </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 PIZZA-MARGARITA. Усі права захищені.</p>
-        </div>
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.15/vue.global.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        const { createApp } = Vue;
+
+        const app = createApp({
+            data() {
+                return {
+                    currentPage: 'home',
+                    isCartOpen: false,
+                    menuItems: [
+                        {
+                            id: 1,
+                            name: "Маргарита",
+                            description: "Класична піца з томатним соусом, моцарелою та базиліком",
+                            price: 150,
+                            image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                        },
+                        {
+                            id: 2,
+                            name: "Пепероні",
+                            description: "Піца з томатним соусом, моцарелою та ковбаскою пепероні",
+                            price: 170,
+                            image: "https://cipollino.ua/content/uploads/images/pytstsa-pepperony-sostav-retsept-y-kaloryinost-1-cipollino.jpg"
+                        },
+                        {
+                            id: 3,
+                            name: "Гавайська",
+                            description: "Піца з томатним соусом, моцарелою, куркою та ананасами",
+                            price: 180,
+                            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7nHf03Dh_2uBagLwVln3pasLLAnmM7dVMPw&s"
+                        },
+                        {
+                            id: 4,
+                            name: "Чотири сири",
+                            description: "Піца з томатним соусом, моцарелою, горгонзолою, пармезаном та фетою",
+                            price: 200,
+                            image: "https://images.unsplash.com/photo-1593504049359-74330189a345?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                        },
+                        {
+                            id: 5,
+                            name: "Вегетаріанська",
+                            description: "Піца з томатним соусом, моцарелою, перцем, грибами, оливками та броколямі",
+                            price: 160,
+                            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDMCE5xWGgtvQi-zSx5OkVNC4hkLDQ0xlWkw&s"
+                        },
+                        {
+                            id: 6,
+                            name: "М'ясна",
+                            description: "Піца з томатним соусом, моцарелою, пепероні, олівками, беконом, ковбаскою та куркою",
+                            price: 190,
+                            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2-_evG-H9NxHx8CI6C1eZHwi1gvXhOygMDQ&s"
+                        },
+                        {
+                            id: 7,
+                            name: "Бургер",
+                            description: "Піца з томатним соусом, сиром чедер, фаршом, марінованими огірками, помідорами та цибулею  ",
+                            price: 180,
+                            image: "https://allogarag.com.ua/wp-content/uploads/2024/02/img_7646.jpg"
+                        },
+                        {
+                            id: 8,
+                            name: "Жульен",
+                            description: "Піца з Куркою, печерицями, моцарелою та часником",
+                            price: 170,
+                            image: "https://assets.dots.live/misteram-public/0196884b-bb01-72a9-b40a-9a6fdf00baca-826x0.png"
+                        },
+                        {
+                            id: 9,
+                            name: "Цезарь",
+                            description: "Піца з сирним соусом,балик, помідор, лист салату,шинка, моцарелою та яйцем",
+                            price: 190,
+                            image: "https://i.obozrevatel.com/food/recipemain/2020/2/5/zhenygohvrxm865gbgzsoxnru3mxjfhwwjd4bmvp.jpeg?size=636x424"
+                        },
+                        {
+                            id: 10,
+                            name: "Сирна",
+                            description: "Піца з сирним соусом та подвійним сиром",
+                            price: 140,
+                            image: "https://karuzo.ua/image/cache/catalog/pizza/syrna-700x480.jpg"
+                        },
+                        {
+                          id: 11, 
+                          name: "Піца з грушею",
+                          description: "Піца з сирним соусом, грушею та сиром дор-блю",
+                          price: 170,
+                          image: "https://assets.dots.live/misteram-public/50f4a096-9521-4572-9f87-9ea7c9852d39.png"
+                        },
+                        {
+                            id: 12,
+                            name: "Фермерська",
+                            description: "Піца з томатним соусом, печерицями, баликом, салямі, помідорами та моцарелою ",
+                            price: 190,
+                            image: "https://assets.dots.live/misteram-public/ec94c2d497d222eba291a201f79a3346-826x0.png"
+                        },
+                        {
+                            id: 13,
+                            name: "Місливська",
+                            description: "Піца з сирним соусом, кукурузою, місливськими ковбасками, цибулею, помідорами та моцарелою",
+                            price: 170,
+                            image: "https://rondo-pizza.kiev.ua/wp-content/uploads/2020/12/%D0%BC%D0%B8%D1%81%D0%BB%D0%B8%D0%B2%D1%81%D1%8C%D0%BA%D0%B0-1.jpg"
+                        },
+                        {
+                            id: 14,
+                            name: "Піца з шинкою",
+                            description: "Піца з томатним соусом, шинкою та моцарелою",
+                            price: 180,
+                            image: "https://shuba.life/static/content/thumbs/1824x912/3/49/xc3sux---c2x1x50px50p-up--4f9d214c87bd3c9f1d5cea9a693c5493.jpg"
+                        },
+                        {
+                            id: 15,
+                            name: "Балоньезе",
+                            description: "Піца з томатним соусом, свинячим фаршом та моцарелою",
+                            price: 210,
+                            image: "https://lh5.googleusercontent.com/proxy/-uQe52NebM8D2B_DZuzEF4qGdLyyUeQUQHp66yHFJmvK8rj_-LvBCeJvuC0e2_65E4hxPfIahUCFWMAKLHq3Og8gQ-EIOGyswkScF__yRXvQ5vvWweboxQd9_c73a_qh_Jq3iiw"
+                        }
+                    ],
+                    cartItems: []
+                };
+            },
+            computed: {
+                cartTotalPrice() {
+                    return this.cartItems.reduce((total, item) => {
+                        return total + (item.price * item.quantity);
+                    }, 0);
+                },
+                cartTotalQuantity() {
+                    return this.cartItems.reduce((total, item) => {
+                        return total + item.quantity;
+                    }, 0);
+                }
+            },
+            methods: {
+                showPage(page) {
+                    this.currentPage = page;
+                    window.scrollTo(0, 0);
+                },
+                toggleCart() {
+                    this.isCartOpen = !this.isCartOpen;
+                },
+                addToCart(item) {
+                    const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+                    
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        this.cartItems.push({
+                            ...item,
+                            quantity: 1
+                        });
+                    }
+                    
+                    // Показуємо кошик при додаванні товару
+                    this.isCartOpen = true;
+                    
+                    // Анімація додавання до кошика
+                    const button = event.target;
+                    button.classList.add('animate__animated', 'animate__pulse');
+                    setTimeout(() => {
+                        button.classList.remove('animate__animated', 'animate__pulse');
+                    }, 1000);
+                },
+                removeFromCart(item) {
+                    this.cartItems = this.cartItems.filter(cartItem => cartItem.id !== item.id);
+                },
+                increaseQuantity(item) {
+                    item.quantity++;
+                },
+                decreaseQuantity(item) {
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                    } else {
+                        this.removeFromCart(item);
+                    }
+                },
+                checkout() {
+                    alert(`Дякуємо за замовлення! Сума: ${this.cartTotalPrice} ₴`);
+                    this.cartItems = [];
+                    this.isCartOpen = false;
+                }
+            },
+            created() {
+                // Завантажуємо кошик з localStorage при завантаженні сторінки
+                const savedCart = localStorage.getItem('pizzaCart');
+                if (savedCart) {
+                    this.cartItems = JSON.parse(savedCart);
+                }
+            },
+            watch: {
+                // Зберігаємо кошик в localStorage при змінах
+                cartItems: {
+                    handler(newCart) {
+                        localStorage.setItem('pizzaCart', JSON.stringify(newCart));
+                    },
+                    deep: true
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
 </body>
 </html>
